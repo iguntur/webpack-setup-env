@@ -14,7 +14,7 @@ const defaultEnv = {
 	}
 };
 
-function webpackSetup(config = {}) {
+function webpackSetup(config) {
 	const webpackConfig = Object.assign({}, defaultEnv, config);
 	const envConfig = webpackConfig.env;
 
