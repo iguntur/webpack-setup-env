@@ -1,0 +1,35 @@
+{
+	"name": "webpack-setup-env",
+	"version": "0.0.0",
+	"description": "Setup webpack config with additional env property",
+	"license": "MIT",
+	"repository": "iguntur/webpack-setup-env",
+	"main": "index.js",
+	"files": [
+		"index.js"
+	],
+	"scripts": {
+		"test": "xo && ava"
+	},
+	"keywords": [
+		"configuration",
+		"environment",
+		"pretty",
+		"webpack"
+	],
+	"author": {
+		"name": "Guntur Poetra",
+		"email": "poetra.guntur@gmail.com",
+		"url": "http://github.com/iguntur"
+	},
+	"engines": {
+		"node": ">=4"
+	},
+	"dependencies": {
+		"lodash.mergewith": "^4.6.1"
+	},
+	"devDependencies": {
+		"ava": "^0.25.0",
+		"xo": "^0.21.1"
+	}
+}
