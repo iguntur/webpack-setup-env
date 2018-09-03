@@ -7,26 +7,19 @@ function customizer(objValue, srcValue) {
 	}
 }
 
-const defaultEnv = {
-	env: {
-		production: {},
-		development: {}
-	}
-};
-
 function webpackSetup(config) {
+	const NODE_ENV = process.env.NODE_ENV || 'production';
+
+	const defaultEnv = {
+		env: {[NODE_ENV]: {}}
+	};
+
 	const webpackConfig = Object.assign({}, defaultEnv, config);
 	const envConfig = webpackConfig.env;
 
 	delete webpackConfig.env;
 
-	switch (process.env.NODE_ENV) {
-		case 'development':
-			return mergeWith(webpackConfig, envConfig.development, customizer);
-		case 'production':
-		default:
-			return mergeWith(webpackConfig, envConfig.production, customizer);
-	}
+	return mergeWith(webpackConfig, envConfig[NODE_ENV], customizer);
 }
 
 module.exports = webpackSetup;
