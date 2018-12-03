@@ -23,3 +23,4 @@ function webpackSetup(config) {
 }
 
 module.exports = webpackSetup;
+module.exports.default = webpackSetup;
