@@ -1,4 +1,8 @@
-# webpack-setup-env [![Build Status](https://travis-ci.org/iguntur/webpack-setup-env.svg?branch=master)](https://travis-ci.org/iguntur/webpack-setup-env)
+# webpack-setup-env
+
+[![Travis CI](https://img.shields.io/travis/iguntur/webpack-setup-env.svg?style=flat-square)](https://travis-ci.org/iguntur/webpack-setup-env)
+[![node](https://img.shields.io/node/v/webpack-setup-env.svg?style=flat-square)](#)
+[![npm](https://img.shields.io/npm/v/webpack-setup-env.svg?style=flat-square)](https://www.npmjs.org/package/webpack-setup-env)
 
 > Setup webpack config with additional env property like babel preset options.
 
@@ -18,66 +22,54 @@ $ npm install webpack-setup-env
 // webpack.config.js
 const path = require('path');
 const webpack = require('webpack');
-const webpackSetupEnv = require('webpack-setup-env');
+const webpackSetup = require('webpack-setup-env');
 
-module.exports = webpackSetupEnv({
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		publicPath: '/'
-	},
-	module: {
-		rules: [
-			{ ... }
-		]
-	},
-	plugins: [
-		new webpack.DefinePlugin({ ... }),
-		new webpack.ProvidePlugin({ ... }),
-	],
-	resolve: {
-		modules: ['node_modules', path.resolve(__dirname, 'src')],
-		extensions: ['.js', '.jsx', '.json', '.css', '.scss', '.sass']
-	},
-	env: {
-		development: {
-			mode: 'development',
-			devtool: 'inline-source-map',
-			entry: [
-				'webpack-hot-middleware/client',
-				path.resolve(__dirname, 'src/app.js')
-			],
-			output: {
-				filename: 'js/app.bundle.js'
-			},
-			plugins: [
-				new webpack.HotModuleReplacementPlugin()
-			]
-		},
-		production: {
-			mode: 'production',
-			devtool: 'none',
-			entry: [
-				path.resolve(__dirname, 'src/app.js')
-			],
-			output: {
-				filename: 'js/app.[hash].bundle.js'
-			},
-			plugins: [
-				new webpack.HashedModuleIdsPlugin()
-			]
-		}
-	}
+module.exports = webpackSetup({
+    output: {
+        path: path.resolve(__dirname, 'dist'),
+        publicPath: '/'
+    },
+    module: {...},
+    plugins: [new webpack.DefinePlugin({...})],
+    resolve: {...},
+    env: {
+        development: {
+            mode: 'development',
+            devtool: 'inline-source-map',
+            entry: [
+                'webpack-hot-middleware/client',
+                path.resolve(__dirname, 'src/app.js')
+            ],
+            output: {
+                filename: 'js/app.bundle.js'
+            },
+            plugins: [...]
+        },
+        production: {
+            mode: 'production',
+            entry: [
+                path.resolve(__dirname, 'src/app.js')
+            ],
+            output: {
+                filename: 'js/app.[hash].bundle.js'
+            },
+            plugins: [ ... ]
+        },
+        ...
+    }
 });
 ```
 
 
 ## API
 
-### webpackSetupEnv(options)
+### webpackSetup(`options`)
 
-* [options](#options): `<object>` <br/>
-	Your webpack configuration.
-* Return: `<object>`
+- Params:
+    - `options`: `<object>` - Webpack configuration.
+        - `options.env[process.env.NODE_ENV]` - Webpack configuration
+- Returns: `<object>` - Merged by [`lodash.mergeWith`](https://lodash.com/docs/#mergeWith)
+
 
 ## Inspiration
 
