@@ -1,6 +1,9 @@
 import {Configuration} from 'webpack';
-export default function webpackSetup(config: Configuration & {
+
+export interface Options {
 	env?: {
-		[key: string]: Configuration;
+		[key: T]: Configuration;
 	};
-}): Configuration;
+}
+
+export default function webpackSetup(config: Configuration & Options): Configuration;
